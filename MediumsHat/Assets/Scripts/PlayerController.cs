@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalMovement;
     private Vector3 velocity = Vector3.zero;
+    Vector2 lastClickedPos;
+    bool moving;
 
 
     private void Start()
@@ -28,6 +30,30 @@ public class PlayerController : MonoBehaviour
             horizontalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         }
         MovePlayer(horizontalMovement);
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            moving = true;
+        }
+
+
+        if (moving && transform.position.x.ToString("0.00") != lastClickedPos.x.ToString("0.00"))
+        {
+            print(transform.position.x.ToString("0.00"));
+            print(lastClickedPos.x.ToString("0.00"));
+            float step = moveSpeed * 0.03f * Time.deltaTime;
+            // MovePlayer(moveSpeed * 5 * Time.deltaTime);
+            lastClickedPos.y = transform.position.y;
+            transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
+        }
+        else
+        {
+            moving = false;
+        }
     }
 
     void MovePlayer(float _horizontalMovement)
