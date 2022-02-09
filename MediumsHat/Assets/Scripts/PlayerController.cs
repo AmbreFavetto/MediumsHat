@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public GameObject stairsZone;
     public bool stairsEnable = false;
-    //public Rigidbody2D cam;
 
     private float horizontalMovement;
     private Vector3 velocity = Vector3.zero;
@@ -43,10 +42,7 @@ public class PlayerController : MonoBehaviour
 
         if (moving && transform.position.x.ToString("0.00") != lastClickedPos.x.ToString("0.00"))
         {
-            print(transform.position.x.ToString("0.00"));
-            print(lastClickedPos.x.ToString("0.00"));
             float step = moveSpeed * 0.03f * Time.deltaTime;
-            // MovePlayer(moveSpeed * 5 * Time.deltaTime);
             lastClickedPos.y = transform.position.y;
             transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
         }
@@ -61,7 +57,6 @@ public class PlayerController : MonoBehaviour
         Vector3 targetVelocity = new Vector2(_horizontalMovement, rb.velocity.y);
 
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
-        //cam.velocity = Vector3.SmoothDamp(cam.velocity, targetVelocity, ref velocity, .05f);
     }
 
     void OnTriggerEnter2D(Collider2D col)
