@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fbe8d423f73904e86a161e9e795909, type: 3}
+  m_Name: Perfume
+  m_EditorClassIdentifier: 
+  id: 2
+  name: Parfum
+  description: "Une d\xE9licate odeur f\xE9minine se d\xE9gage de cette bouteille
+    de parfum."
+  image: {fileID: 85919881110890362, guid: f5ce608e78c65684a896e1ef46c75e6c, type: 3}
