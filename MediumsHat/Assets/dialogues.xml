@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<chapter_1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <pnj id = "0">
+        <page number = "0">
+            <name>le 1</name>
+            <dialogue>coucou</dialogue>
+        </page>
+
+        <page number = "1">
+            <name>toujours le 1</name>
+            <dialogue>mon petit</dialogue>
+        </page>
+
+        <page number = "2">
+            <name>encore le 1</name>
+            <dialogue>alexis</dialogue>
+        </page>
+    </pnj>
+
+    <pnj id = "1">
+        <page number = "3">
+            <name>le 2</name>
+            <dialogue>salut</dialogue>
+        </page>
+
+        <page number = "4">
+            <name>toujours le 2</name>
+            <dialogue>petit</dialogue>
+        </page>
+
+        <page number = "5">
+            <name>encore le 2</name>
+            <dialogue>yoyo</dialogue>
+        </page>
+    </pnj>
+</chapter_1>
