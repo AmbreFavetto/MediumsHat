@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public Dialogue dialogue;
     public bool isInRange;
+    public int numPnj;
 
     void Update()
     {
@@ -27,6 +27,6 @@ public class DialogueTrigger : MonoBehaviour
 
     public void triggerDialogue()
     {
-        DialogueManager.instance.startDialogue(1);
+        DialogueManager.instance.startDialogue(numPnj);
     }
 }

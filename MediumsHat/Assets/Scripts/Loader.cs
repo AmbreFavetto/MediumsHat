@@ -10,16 +10,22 @@ using System.Xml.Linq;
 public class Loader : MonoBehaviour
 {
     XDocument xmlDoc;
-    IEnumerable<XElement> pnjs;
-    IEnumerable<XElement> items;
-    static List<XMLData> data = new List<XMLData>();
+    IEnumerable<XElement> choices;
+    static List<XMLData> data;
+    int choice = 0;
     int iteration = 0;
     int pageNum = 0;
     int pnjId = 0;
     string charText;
     string dialogueText;
+    List<KeyValuePair<int, string>> response;
+
     bool finishedLoading = false;
 
+    void Awake() {
+        response = new List<KeyValuePair<int, string>>();
+        data = new List<XMLData>();
+    }
     void Start() {
         DontDestroyOnLoad(gameObject);
         LoadXML();
@@ -35,66 +41,66 @@ public class Loader : MonoBehaviour
 
     void LoadXML() {
         xmlDoc = XDocument.Load("Assets/dialogues.xml");
-        pnjs = xmlDoc.Descendants("pnj"); 
-
-        //items = xmlDoc.Descendants("pages").Elements();
+        choices = xmlDoc.Descendants("page").Elements();
     }
 
-
     IEnumerator AssignData() {
-        foreach(var pnj in pnjs) {
-            items = xmlDoc.Descendants("page").Elements();
-            foreach(var item in items) {
-                if(item.Parent.Attribute("number").Value == iteration.ToString()) {
-                    pnjId = int.Parse(item.Parent.Parent.Attribute("id").Value);
-                    pageNum = int.Parse(item.Parent.Attribute("number").Value);
-                    charText = item.Parent.Element("name").Value.Trim();
-                    dialogueText = item.Parent.Element("dialogue").Value.Trim();
-                    data.Add(new XMLData(pnjId, pageNum, charText, dialogueText));
-                    iteration++;
+        var i = 0;
+        foreach(var eltsChoice in choices) {
+            pnjId = int.Parse(eltsChoice.Parent.Parent.Attribute("id").Value);
+            pageNum = int.Parse(eltsChoice.Parent.Attribute("number").Value);
+            choice = int.Parse(eltsChoice.Attribute("branche").Value);
+            charText = eltsChoice.Element("name").Value.Trim();
+            dialogueText = eltsChoice.Element("dialogue").Value.Trim();
+
+            if(response != null) {
+                response.Clear();
+            }
+
+            XElement elt = eltsChoice.Element("responses");
+            IEnumerable<XElement> tests = null;
+
+            if(elt != null) {
+                tests = elt.Elements();        
+                foreach(var test in tests) {
+                    response.Add(new KeyValuePair<int, string>(int.Parse(test.Attribute("choice").Value) ,test.Element("text").Value.Trim()));                   
+                }     
+            } else {
+                response.Add(new KeyValuePair<int, string>(0, "NULL"));
+            }    
+
+            Debug.Log(i);
+            data.Add(new XMLData(response, choice, pnjId, pageNum, charText, dialogueText));
+            foreach(var xmldata in data) {
+                foreach(var reponse in xmldata.responsesSentences) {
+                    Debug.Log(reponse);
                 }
             }
             
-        }
+            i++;
+        }      
+
         finishedLoading = true;
         yield return null;
     }
 
-    // IEnumerator AssignData() {
-    //         iteration = 0;
-    //         foreach(var item in items) {
-    //             if(item.Parent.Attribute("number").Value == iteration.ToString()) {
-    //                 pnjId = int.Parse(item.Parent.Parent. Attribute("id").Value);
-    //                 Debug.Log("pnjId " + pnjId);
-    //                 pageNum = int.Parse(item.Parent.Attribute("number").Value);
-    //                 Debug.Log("pageNum "+ pageNum);
-    //                 charText = item.Parent.Element("name").Value.Trim();
-    //                 dialogueText = item.Parent.Element("dialogue").Value.Trim();
-    //                 Debug.Log("dialogue text "+ dialogueText);
-    //                 data.Add(new XMLData(pageNum, charText, dialogueText));
-    //                 iteration++;
-    //             }
-    //         }
-    //         finishedLoading = true;
-    //         yield return null;
-    // }
-        
-        
-    
     public List<XMLData> getData() {
         return data;
     }
 }
 
 
-
 public class XMLData {
+    public List<KeyValuePair<int, string>> responsesSentences;
+    public int choiceNum;
     public int pnjNum;
     public int pageNum;
     public string charText;
     public string dialogueText;
 
-    public XMLData(int pnj, int page, string character, string dialogue) {
+    public XMLData(List<KeyValuePair<int, string>> responses, int choice, int pnj, int page, string character, string dialogue) {
+        responsesSentences = responses;
+        choiceNum = choice;
         pnjNum = pnj;
         pageNum = page;
         charText = character;

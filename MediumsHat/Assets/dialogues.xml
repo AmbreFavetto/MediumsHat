@@ -1,37 +1,96 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <chapter_1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- Smoker -->
     <pnj id = "0">
         <page number = "0">
-            <name>le 1</name>
-            <dialogue>coucou</dialogue>
+            <choix branche = "0">
+                <name>Philipe</name>
+                <dialogue>He vous ! Faites bien attention...</dialogue>
+            </choix>
         </page>
 
         <page number = "1">
-            <name>toujours le 1</name>
-            <dialogue>mon petit</dialogue>
+            <choix branche = "0">
+                <name>Philipe</name>
+                <dialogue>Les apparences peuvent être trompeuses.</dialogue>
+            </choix>
+        </page>
+
+        <!-- <page number = "2">
+            <choix branche = "0">
+                <name>Philipe</name>
+                <dialogue>alexis</dialogue>
+            </choix>
+        </page> -->
+    </pnj>
+
+    <!-- Policeman -->
+    <pnj id = "1">
+        <page number = "0">
+            <choix branche = "0">
+                <name>Edmond</name>
+                <dialogue>N'avancez plus monsieur, le cabaret est désormais fermé au publique</dialogue>
+            </choix>
+        </page>
+
+        <page number = "1">
+            <choix branche = "0">
+                <name>Edmond</name>
+                <dialogue>Si vous voulez avoir la chance d'écouter la grande Lady Lolita chanter il vous faudra revenir un autre jour.</dialogue>
+            </choix>
         </page>
 
         <page number = "2">
-            <name>encore le 1</name>
-            <dialogue>alexis</dialogue>
+            <choix branche = "0">
+                <name>Edmond</name>
+                <dialogue>Ne loupez pas votre prochaine occasion. Maintenant circulez.</dialogue>
+                <responses>
+                    <response choice = "0">
+                        <text> OK mec </text>
+                    </response>
+                    <response choice = "1">
+                        <text> JAMAIS ! </text>
+                    </response>
+                </responses>
+            </choix>
+            
+        </page>
+
+        <page number = "3">
+            <choix branche = "0">
+                <name>Edmond</name>
+                <dialogue>Bonne journée.</dialogue>
+            </choix>
+            <choix branche = "1">
+                <name>Edmond</name>
+                <dialogue>Si vous ne circulez pas immédiatement vous m'accompagnerez directement au poste.</dialogue>
+            </choix>
         </page>
     </pnj>
 
-    <pnj id = "1">
+    <!-- Merchante -->
+    <pnj id = "2">
+        <page number = "1">
+            <choix branche = "0">
+                <name>Olivia la marchande</name>
+                <dialogue>Salut...</dialogue>
+            </choix>
+        </page>
+
+        <page number = "2">
+            <choix branche = "0">
+                <name>Olivia la marchande</name>
+                <dialogue>Acheter quelque chose ?...</dialogue>
+            </choix>
+        </page>
+
         <page number = "3">
-            <name>le 2</name>
-            <dialogue>salut</dialogue>
-        </page>
-
-        <page number = "4">
-            <name>toujours le 2</name>
-            <dialogue>petit</dialogue>
-        </page>
-
-        <page number = "5">
-            <name>encore le 2</name>
-            <dialogue>yoyo</dialogue>
+            <choix branche = "0">
+                <name>Olivia la marchande</name>
+                <dialogue>Voici ce que j'ai à vous proposer :</dialogue>
+            </choix>
         </page>
     </pnj>
 </chapter_1>
