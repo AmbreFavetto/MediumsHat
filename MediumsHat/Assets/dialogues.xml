@@ -75,21 +75,7 @@
         <page number = "1">
             <choix branche = "0">
                 <name>Olivia la marchande</name>
-                <dialogue>Salut...</dialogue>
-            </choix>
-        </page>
-
-        <page number = "2">
-            <choix branche = "0">
-                <name>Olivia la marchande</name>
-                <dialogue>Acheter quelque chose ?...</dialogue>
-            </choix>
-        </page>
-
-        <page number = "3">
-            <choix branche = "0">
-                <name>Olivia la marchande</name>
-                <dialogue>Voici ce que j'ai à vous proposer :</dialogue>
+                <dialogue>Salut...Vous voulez acheter quoi?</dialogue>
             </choix>
         </page>
     </pnj>

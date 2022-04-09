@@ -7,6 +7,8 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Xml.Linq;
 
+using System;
+
 public class Loader : MonoBehaviour
 {
     XDocument xmlDoc;
@@ -18,14 +20,15 @@ public class Loader : MonoBehaviour
     int pnjId = 0;
     string charText;
     string dialogueText;
-    List<KeyValuePair<int, string>> response;
+    List<(int,string)> response;
 
     bool finishedLoading = false;
 
     void Awake() {
-        response = new List<KeyValuePair<int, string>>();
+        response = new List<(int,string)>();
         data = new List<XMLData>();
     }
+
     void Start() {
         DontDestroyOnLoad(gameObject);
         LoadXML();
@@ -45,17 +48,15 @@ public class Loader : MonoBehaviour
     }
 
     IEnumerator AssignData() {
-        var i = 0;
         foreach(var eltsChoice in choices) {
             pnjId = int.Parse(eltsChoice.Parent.Parent.Attribute("id").Value);
             pageNum = int.Parse(eltsChoice.Parent.Attribute("number").Value);
             choice = int.Parse(eltsChoice.Attribute("branche").Value);
+
             charText = eltsChoice.Element("name").Value.Trim();
             dialogueText = eltsChoice.Element("dialogue").Value.Trim();
-
-            if(response != null) {
-                response.Clear();
-            }
+            
+            response = new List<(int,string)>();
 
             XElement elt = eltsChoice.Element("responses");
             IEnumerable<XElement> tests = null;
@@ -63,23 +64,17 @@ public class Loader : MonoBehaviour
             if(elt != null) {
                 tests = elt.Elements();        
                 foreach(var test in tests) {
-                    response.Add(new KeyValuePair<int, string>(int.Parse(test.Attribute("choice").Value) ,test.Element("text").Value.Trim()));                   
+                    response.Add((int.Parse(test.Attribute("choice").Value), test.Element("text").Value.Trim()));                   
                 }     
             } else {
-                response.Add(new KeyValuePair<int, string>(0, "NULL"));
+                response.Add((0,"NULL"));
             }    
 
-            Debug.Log(i);
             data.Add(new XMLData(response, choice, pnjId, pageNum, charText, dialogueText));
-            foreach(var xmldata in data) {
-                foreach(var reponse in xmldata.responsesSentences) {
-                    Debug.Log(reponse);
-                }
-            }
-            
-            i++;
         }      
-
+        foreach(var elt in data) {
+            Debug.Log("repsonse : " + response + "choice : " + choice + "pnj : " + pnjId);
+        }
         finishedLoading = true;
         yield return null;
     }
@@ -91,14 +86,14 @@ public class Loader : MonoBehaviour
 
 
 public class XMLData {
-    public List<KeyValuePair<int, string>> responsesSentences;
+    public List<(int, string)> responsesSentences;
     public int choiceNum;
     public int pnjNum;
     public int pageNum;
     public string charText;
     public string dialogueText;
 
-    public XMLData(List<KeyValuePair<int, string>> responses, int choice, int pnj, int page, string character, string dialogue) {
+    public XMLData(List<(int, string)> responses, int choice, int pnj, int page, string character, string dialogue) {
         responsesSentences = responses;
         choiceNum = choice;
         pnjNum = pnj;
