@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
+    public AudioSource audioSource;
+    public AudioClip sound;
+
     private void Awake() {
         if(instance != null) {
             Debug.LogWarning("Il y a plus d'une instance de PlayerController dans la scène");
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void MouseMovement()
     {
+        //AudioSource.PlayClipAtPoint(sound, player.transform.position);
         if (Input.GetMouseButtonDown(0))
         {
             lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -64,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void KeyboardMovement()
     {
-
+        //AudioSource.PlayClipAtPoint(sound, player.transform.position);
         if (Input.GetAxis("Horizontal") != 0)
         {
             lastClickedPos = transform.position;

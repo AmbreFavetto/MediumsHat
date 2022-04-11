@@ -48,7 +48,7 @@
                 <dialogue>Ne loupez pas votre prochaine occasion. Maintenant circulez.</dialogue>
                 <responses>
                     <response choice = "0">
-                        <text> OK mec </text>
+                        <text> Je reviendrai avec un billet dans ce cas. </text>
                     </response>
                     <response choice = "1">
                         <text> JAMAIS ! </text>

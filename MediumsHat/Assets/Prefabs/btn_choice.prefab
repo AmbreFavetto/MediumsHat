@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026295028248385887}
-  - component: {fileID: 8297779499535724342}
   - component: {fileID: 7147788173281886059}
+  - component: {fileID: 8297779499535724342}
   - component: {fileID: 8936486751054107108}
   m_Layer: 0
   m_Name: btn_choice
@@ -38,6 +38,14 @@ RectTransform:
   m_AnchoredPosition: {x: -54.5791, y: 27.769684}
   m_SizeDelta: {x: 908.8419, y: 55.5394}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7147788173281886059
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3486639595416933741}
+  m_CullTransparentMesh: 1
 --- !u!114 &8297779499535724342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +70,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -81,15 +89,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8936486751054107108}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &7147788173281886059
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3486639595416933741}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8936486751054107108
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,28 +8,37 @@ using System;
 
 public class DialogueManager : MonoBehaviour
 {
+    // infos dialogue
     public string[] charactersName;
     public Text dialogueText;
     public Text CharacterName;
+
+    // management of dialogues
     private Queue<string> sentences;
     private Queue<string> names;
     private Queue<int> choices;
     private Queue<List<(int,string)>> responses;
     List<GameObject> btnInstances;
-
+    List<GameObject> itemInstances;
+    GameObject newResponse = null;
+    
     public static DialogueManager instance;
     
+    // to buy items
+    public Item item;
+    bool isMerchante = false;
+    GameObject newObject = null;
+    
+    
+
+    // visual
     public GameObject prefabResponse;
+    public List<GameObject> prefabObjToBuy;
     public GameObject dialogueChoicesUI;
     public GameObject objectToBuyUI;
     public GameObject dialogueUI;
     public GameObject btnNextSentenceUI;
-    public List<GameObject> prefabObjToBuy;
-    public Item item;
-
-    GameObject newObject = null;
-
-    bool isMerchante = false;
+    public Animator animator;
 
     private void Awake()
     {
@@ -45,8 +54,9 @@ public class DialogueManager : MonoBehaviour
         choices = new Queue<int>();
         responses = new Queue<List<(int, string)>>();
         btnInstances = new List<GameObject>();
-
+        itemInstances = new List<GameObject>();
     }
+
     public void startDialogue(int pnj)
     {
         Time.timeScale = 0;
@@ -68,6 +78,11 @@ public class DialogueManager : MonoBehaviour
                 } else {
                     isMerchante = false;
                 }
+                // policeman
+                if(elt.pnjNum == 1) {
+                    animator.SetBool("isSpeaking", true);
+                }
+
                 names.Enqueue(elt.charText);
                 sentences.Enqueue(elt.dialogueText);
                 choices.Enqueue(elt.choiceNum);
@@ -83,8 +98,8 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence(int choice = 0)
     {
-        if(newObject != null) {
-            Destroy(newObject.gameObject);
+        foreach(var item in itemInstances) {
+            Destroy(item.gameObject);
         }
 
         if(sentences.Count == 0)
@@ -97,22 +112,23 @@ public class DialogueManager : MonoBehaviour
             CharacterName.text = names.Dequeue();
             dialogueText.text = sentences.Dequeue(); 
             List<(int choice, string response)> tempResponses = new List<(int choice, string response)>();
-            tempResponses = responses.Dequeue();               
+            tempResponses = responses.Dequeue();             
             foreach(var response in tempResponses) {
                 if(isMerchante) {
                     foreach(var obj in prefabObjToBuy) {
                         newObject = Instantiate(obj);
+                        itemInstances.Add(newObject);
                         newObject.transform.SetParent(objectToBuyUI.transform, false);
                         newObject.GetComponentInChildren<Button>().onClick.AddListener(delegate(){BuyItem(15, item);});
-                    }                    
+                    }
                 }
                 if(response.response != "NULL") { 
                     btnNextSentenceUI.SetActive(false);
-                    GameObject newResponse = Instantiate(prefabResponse);
+                    newResponse = Instantiate(prefabResponse);
                     btnInstances.Add(newResponse);
                     newResponse.transform.SetParent(dialogueChoicesUI.transform, false);
                     newResponse.GetComponentInChildren<Text>().text = response.response; 
-                    newResponse.GetComponentInChildren<Button>().onClick.AddListener(delegate(){DisplayNextSentenceWithChoice(response.choice);});           
+                    newResponse.GetComponentInChildren<Button>().onClick.AddListener(delegate(){DisplayNextSentence(response.choice);});      
                 } else {
                     btnNextSentenceUI.SetActive(true);
                 }  
@@ -127,23 +143,10 @@ public class DialogueManager : MonoBehaviour
     }
     void EndDialogue()
     {
+        animator.SetBool("isSpeaking", false);
         dialogueUI.SetActive(false);
         Time.timeScale = 1;
         Debug.Log("fin du dialogue");
-
-    }
-
-    public void setChoice(int choiceNum) {
-
-    }
-
-    public void DisplayNextSentenceWithChoice(int choice) {
-        Debug.Log("coucou");
-        //Destroy(dialogueChoicesUI.GetComponentInChildren<Button>().gameObject);
-        foreach(var btn in btnInstances) {
-            Destroy(btn.gameObject);
-        }
-        DisplayNextSentence(choice);
     }
 
     public void BuyItem(int cost, Item item) {
@@ -151,6 +154,7 @@ public class DialogueManager : MonoBehaviour
             Inventory.instance.content.Add(item);
             Inventory.instance.coinsCount -= cost;
             Inventory.instance.coinsCountText.text = Inventory.instance.coinsCount.ToString();
+            // TODO Destroy instance item ?? 
         }
         
     }
