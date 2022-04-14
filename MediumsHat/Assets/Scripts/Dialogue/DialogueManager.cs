@@ -67,7 +67,8 @@ public class DialogueManager : MonoBehaviour
         choices.Clear();
         responses.Clear();
 
-        Loader loader = new Loader();
+        MainMenu loader = new MainMenu();
+        //Loader loader = new Loader();
         List<XMLData> data=loader.getData();
 
         foreach(var elt in data) {
@@ -123,7 +124,7 @@ public class DialogueManager : MonoBehaviour
                     }
                 }
                 if(response.response != "NULL") { 
-                    btnNextSentenceUI.SetActive(false);
+                    //btnNextSentenceUI.SetActive(false);
                     newResponse = Instantiate(prefabResponse);
                     btnInstances.Add(newResponse);
                     newResponse.transform.SetParent(dialogueChoicesUI.transform, false);

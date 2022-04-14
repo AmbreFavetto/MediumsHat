@@ -14599,6 +14599,22 @@ PrefabInstance:
       value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8904007649773869207, guid: 744e723ff4aced144a68f1de8c32742a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904007649773869207, guid: 744e723ff4aced144a68f1de8c32742a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904007649773869207, guid: 744e723ff4aced144a68f1de8c32742a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904007649773869207, guid: 744e723ff4aced144a68f1de8c32742a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904007649773869207, guid: 744e723ff4aced144a68f1de8c32742a, type: 3}
       propertyPath: m_SizeDelta.x
       value: 30
       objectReference: {fileID: 0}
@@ -14608,11 +14624,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904007649773869207, guid: 744e723ff4aced144a68f1de8c32742a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 248.89
+      value: 484.9
       objectReference: {fileID: 0}
     - target: {fileID: 8904007649773869207, guid: 744e723ff4aced144a68f1de8c32742a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 209.65
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8904007649776663185, guid: 744e723ff4aced144a68f1de8c32742a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -21114,7 +21130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playlist:
-  - {fileID: 8300000, guid: 9063d0276d98ace49af0956e8f33a84c, type: 3}
+  - {fileID: 8300000, guid: d0077fa9b5ce19e4a8fabbcf9d97b6db, type: 3}
   audioSource: {fileID: 2123474927}
 --- !u!82 &2123474927
 AudioSource:
